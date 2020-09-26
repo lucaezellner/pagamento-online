@@ -1,11 +1,88 @@
 {% extends 'main/base.html' %}
 {% block content %}
 {% load static %}
+{% load crispy_forms_tags %}
+
+<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+<script src="https://momentjs.com/downloads/moment.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="https:////cdn.datatables.net/plug-ins/1.10.21/dataRender/datetime.js" crossorigin="anonymous"></script>
 
 <div class="row mt-3">
-    <div class="col-12">
-        Home
+    <div class="col-4 mb-3">
+        <div class="card">
+            <div class="card-header py-1 h6 text-white bg-secondary"><i class="fas fa-user mr-1"></i>Criação de recebedores</div>
+            <div class="card-body p-2">
+            {% crispy recebedor_form recebedor_form.helper %}
+            </div>
+        </div>
+    </div>
+    <div class="col-8 mb-3">
+        <div class="card h-100">
+            <div class="card-header py-1 h6 text-white bg-secondary"><i class="fas fa-list mr-1"></i>Recebedores cadastrados</div>
+            <div class="card-body p-1">
+                <div class="p-2">
+                    <table id="table-recebedores" class="table table-striped table-bordered" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>ID Recebedor</th>
+                                <th>Código do banco</th>
+                                <th>Agência</th>
+                                <th>Conta</th>
+                                <th>Dígito</th>
+                                <th>CPF</th>
+                                <th>Status</th>
+                                <th>Última Transferência</th>
+                                <th>Data de Criação</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-12">
+        <div class="card h-100">
+            <div class="card-header py-1 h6 text-white bg-secondary"><i class="fas fa-dollar-sign mr-1"></i>Saldo dos Recebedores</div>
+            <div class="card-body p-1">
+                <div class="p-2">
+                    <div class="input-group mb-3">
+                        <input id="id-recebedor" type="text" class="form-control" placeholder="ID do Recebedor">
+                        <div class="input-group-append">
+                          <button id="busca-saldo" class="btn btn-primary" type="button">Buscar</button>
+                        </div>
+                      </div>
+                    <table id="table-saldo" class="table table-striped table-bordered" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>Aguardando</th>
+                                <th>Transferido</th>
+                                <th>Disponível</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-12">
+        <div class="card mb-3">
+            <div class="card-header py-1 h6 text-white bg-secondary"><i class="fas fa-credit-card mr-1"></i>Transação cartão de crédito com split</div>
+            <div class="card-body p-2">
+                {% crispy transacao_form transacao_form.helper %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"> 
+    var pagarme_api = "{{pagarme_api}}";
+ </script>
 <script src="{% static 'scripts/custom.js' %}"></script>
 {% endblock %}
