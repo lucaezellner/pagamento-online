@@ -72,3 +72,41 @@ class TransacaoForm(forms.Form):
             ),
             Submit('submit', 'Realizar transação', css_class='btn-block btn-primary')
         )
+
+class EstornoForm(forms.Form):
+    transacao_id = forms.CharField(label='ID da transação')
+    valor = forms.FloatField(label='Valor da transação')
+    recebedor_1_id = forms.CharField(label='ID do recebedor 1')
+    recebedor_1_valor = forms.FloatField(label='Valor para recebedor 1')
+    split_1_id = forms.CharField(label='ID da split recebedor 1')
+    recebedor_2_id = forms.CharField(label='ID do recebedor 2')
+    recebedor_2_valor = forms.FloatField(label='Valor para recebedor 2')
+    split_2_id = forms.CharField(label='ID da split recebedor 2')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.helper = FormHelper
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'estorno'
+        
+        self.helper.layout = Layout(
+            Row(
+                Column('transacao_id', css_class='form-group col-md-6 mb-0'),
+                Column('valor', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('recebedor_1_id', css_class='form-group col-md-4 mb-0'),
+                Column('recebedor_1_valor', css_class='form-group col-md-4 mb-0'),
+                Column('split_1_id', css_class='form-group col-md-4 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('recebedor_2_id', css_class='form-group col-md-4 mb-0'),
+                Column('recebedor_2_valor', css_class='form-group col-md-4 mb-0'),
+                Column('split_2_id', css_class='form-group col-md-4 mb-0'),
+                css_class='form-row'
+            ),
+            Submit('submit', 'Realizar estorno', css_class='btn-block btn-primary')
+        )

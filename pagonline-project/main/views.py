@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import RecebedorForm, TransacaoForm
+from .forms import RecebedorForm, TransacaoForm, EstornoForm
 import requests
 import json
 import os
@@ -15,8 +15,9 @@ load_dotenv(dotenv_path)
 def home(request):
     recebedor_form = RecebedorForm
     transacao_form = TransacaoForm
+    estorno_form = EstornoForm
     pagarme_api = os.getenv("PAGARME_API_KEY")
-    return render(request, "main/home.html",{"page_title": "Pagamento Online", "recebedor_form": recebedor_form, "transacao_form": transacao_form, "pagarme_api": pagarme_api})
+    return render(request, "main/home.html",{"page_title": "Pagamento Online", "recebedor_form": recebedor_form, "transacao_form": transacao_form, "estorno_form": estorno_form, "pagarme_api": pagarme_api})
 
 def criar_recebedor(request):
     if request.method == 'POST':
@@ -175,4 +176,46 @@ def criar_transacao(request):
         else:
             print('invalido')
 
+def estorno(request):
+    if request.method == 'POST':
+        form = EstornoForm(request.POST)
+        if form.is_valid():
+            transacao_id = form.cleaned_data['transacao_id']
+            valor = form.cleaned_data['valor'] * 100
+            recebedor_1_id = form.cleaned_data['recebedor_1_id']
+            recebedor_1_valor = form.cleaned_data['recebedor_1_valor'] * 100
+            split_1_id = form.cleaned_data['split_1_id']
+            recebedor_2_id = form.cleaned_data['recebedor_2_id']
+            recebedor_2_valor = form.cleaned_data['recebedor_2_valor'] * 100
+            split_2_id = form.cleaned_data['split_2_id']
 
+            url = "https://api.pagar.me/1/transactions/" + transacao_id + "/refund/?api_key=" + os.getenv("PAGARME_API_KEY")
+            headers = {
+                'Content-Type': 'application/json',
+                'Connection' : 'keep-alive',
+                'Accept': "*/*"
+            }
+            data = {
+                "amount": valor,
+                "async": "false",
+                "split_rules": [
+                    {
+                        "id": split_1_id,
+                        "amount": recebedor_1_valor,
+                        "recipient_id": recebedor_1_id
+                    },
+                    {
+                        "id": split_2_id,
+                        "amount": recebedor_2_valor,
+                        "recipient_id": recebedor_2_id,
+                        "charge_processing_fee": "true"
+                    }
+                ]
+            }
+
+            r = requests.post(url, data=json.dumps(data), headers=headers)
+            print(r.json())
+
+            return redirect('home')
+        else:
+            print('invalido')

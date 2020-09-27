@@ -1,3 +1,33 @@
 .bg-verde{
     background-color: #A7BF30 !important;
 }
+
+.text-verde{
+    color: #A7BF30 !important;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-primary:active {
+	background-color: #A7BF30;
+	border-color: #A7BF30;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active{
+    background-color: #A7BF30;
+	border-color: #A7BF30;
+}
+
+.btn-primary.focus, .btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(167,191,48,.5);
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus{
+    box-shadow: 0 0 0 0.2rem rgba(167,191,48,.5);
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #A7BF30;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(167,191,48,.5);
+}

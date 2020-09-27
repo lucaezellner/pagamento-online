@@ -87,6 +87,38 @@ $(document).ready(function () {
         "oLanguage": portugues
     });
 
+    var tableTransacoes = $("#table-transacoes").DataTable({
+        "ajax": {
+                    url: "https://api.pagar.me/1/transactions?api_key=" + pagarme_api,
+                    dataSrc: ""
+                },
+        "columns": [
+            { "data": "id", "defaultContent": "Sem dados" },
+            { "data": "status", "defaultContent": "Sem dados" },
+            { "data": "amount", "defaultContent": "Sem dados" },
+            { "data": "customer.name", "defaultContent": "Sem dados" },
+            { "data": "date_created", "defaultContent": "Sem dados" },
+            { "data": "split_rules[, ].recipient_id"},
+            { "data": "split_rules[, ].id"}
+        ],
+        columnDefs: [
+            {
+            targets: [2],
+            render: function ( data, type, row, meta ) {
+                var valor = parseFloat(data)/100.00;
+                return "R$ " + valor.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');;
+              }
+            },
+            {
+                targets: 4,
+                render: $.fn.dataTable.render.moment('YYYY-MM-DDTHH:mm:ss.SSSZ', 'DD/MM/YYYY - HH:mm:ss')
+            }
+        ],
+        "scrollY": "200px",
+        "scrollX": true,
+        "oLanguage": portugues
+    });
+
     
     $("#busca-saldo").on("click", function () {
         // set the ajax option value of the dataTable here according to the select's value
@@ -97,6 +129,10 @@ $(document).ready(function () {
 
     setInterval(function () {
         tableRecebedores.ajax.reload(null, false);
+    }, 5000);
+
+    setInterval(function () {
+        tableTransacoes.ajax.reload(null, false);
     }, 5000);
     
 })
