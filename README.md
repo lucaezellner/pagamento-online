@@ -31,6 +31,7 @@ SECRET_KEY = "secret key do django"
 
 Para iniciar o servidor localmente, basta executar o comando:
 ```sh
+$ cd pagonline-project
 $ python manage.py runserver
 ```
 Pronto! O projeto já estará rodando e disponível para testes em http://localhost:8000/.
