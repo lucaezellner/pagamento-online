@@ -6,22 +6,32 @@
     color: #A7BF30 !important;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-primary:active {
-	background-color: #A7BF30;
-	border-color: #A7BF30;
+.btn-primary, .btn-primary:active, .btn-primary:visited, .btn-primary:active, .btn-primary:not(:disabled):not(.disabled):active {
+	z-index: 5000;
+    text-align: center;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    font-family: Lato, sans-serif;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    border: none;
+    text-decoration: none;
+    transition: all 0.4s ease 0s;
+    background-color: rgb(101, 163, 0);
 }
 
-.btn-primary:not(:disabled):not(.disabled):active{
-    background-color: #A7BF30;
-	border-color: #A7BF30;
+.btn-primary.focus, .btn-primary:focus, .btn-primary:not(:disabled):not(.disabled):active:focus {
+    box-shadow: rgba(77, 80, 98, 0.25) 0px 8px 24px 0px;
+    background-color: rgb(79, 127, 0);
 }
 
-.btn-primary.focus, .btn-primary:focus {
-    box-shadow: 0 0 0 0.2rem rgba(167,191,48,.5);
-}
-
-.btn-primary:not(:disabled):not(.disabled):active:focus{
-    box-shadow: 0 0 0 0.2rem rgba(167,191,48,.5);
+.btn-primary:hover{
+    opacity: 0.8;
+    background-color: rgb(101, 163, 0);
 }
 
 .form-control:focus {
@@ -30,4 +40,20 @@
     border-color: #A7BF30;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(167,191,48,.5);
+}
+
+
+
+.page-item.active .page-link {
+    background-color: rgb(101, 163, 0) !important;
+    z-index: 5000;
+    border-color: rgb(101, 163, 0);
+    transition: all 0.4s ease 0s;
+}
+.page-item.active .page-link:hover {
+    background-color: rgb(101, 163, 0);
+    opacity: 0.8;
+}
+.page-item.active .page-link.current {
+    background-color: rgb(101, 163, 0);
 }

@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<div class="row mt-3">
+    <div class="col-12 mb-3">
+        <h2>Adquirente</h2>
+        <p>Tem o papel de liquidar transações financeiras por meio de cartão de débito ou crédito, estabelecendo uma comunicação entre as bandeiras de cartão e bancos. Pode ser definida com uma <b>maquininha do mundo virtual</b>. Caso a transação seja aprovada, recebem do consumidor e repassam ao comerciante no prazo combinado.</p>
+        <p>Meio de pagamento mais barato, pois promove uma ligação entre o e-commerce e o banco, sem intermediários. Contudo, <b>não conta com soluções antifraude</b>, sendo necessário que esse processo seja realizado por parte do lojista. Caso contrário, a transação fica mais vulnerável e a loja corre o risco de sofrer com problemas nas operações.</p>
+    </div>
+    <div class="col-12 mb-3">
+        <h2>Bandeiras de cartão</h2>
+        <p>Ponte entre adquirentes e consumidor. No momento da compra, a adquirente aciona a bandeira de cartão, que por sua vez aciona o emissor do cartão (banco). Este tem o poder de autorizar ou negar a transação, regulando o uso do cartão.</p>
+    </div>
+    <div class="col-12 mb-3">
+        <h2>Subadquirente</h2>
+        <p>Fazem a intermediação dos pagamentos entre todas as partes envolvidas. São muito utilizadas por lojas menores pela facilidade que proporcionam para o comerciante. Garantem várias opções de pagamento aos clientes e sistemas próprios de antifraude. São mais <b>fáceis de implementar</b> e não exigem que o comerciante seja pessoa jurídica. Entretanto, possuem maiores taxas (calculadas por venda) do que contratar o serviço diretamente por uma adquirente.</p>
+    </div>
+    <div class="col-12 mb-3">
+        <h2>Gateways de pagamento</h2>
+        <p>Processam as informações no momento em que a compra é finalizada no checkout da loja online. Este modelo não substitui as adquirentes, que ainda serão responsáveis pelo processamento do pagamento. Funciona como intermediador da adquirente com os bancos. A cobrança é feita pelo volume de transações e não por um percentual de vendas, como na subadquirente. Possuem <b>alta conversão de pagamentos</b> e a facilidade de, em um único canal, poder utilizar diversas funcionalidades e opções de pagamento.</p>
+    </div>
+    <div class="col-12 mb-3">
+        <h2>PSP (Payment Service Provider)</h2>
+        <p>Reúne os pontos positivos dos gateways e das subadquirentes, ou seja, <b>alta performance e facilidade de integração</b>. Essas vantagens também facilitam a vida do empresário, pois além de conseguir fazer a gestão completa das transações, também passa a contar com todas as ferramentas necessárias para oferecer um modo simples e seguro de comprar na loja virtual. <b>O Pagar.me se enquadra neste modelo.</b></p>
+    </div>
+</div>
+
+<script src="{% static 'scripts/custom.js' %}"></script>
+{% endblock %}

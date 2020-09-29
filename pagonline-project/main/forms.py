@@ -41,7 +41,12 @@ class RecebedorForm(forms.Form):
                 Column('digito', css_class='form-group col-md-3 mb-0'),
                 css_class='form-row'
             ),
-            Submit('submit', 'Criar recebedor', css_class='btn-block btn-primary')
+            Row(
+                Column(
+                    Submit('submit', 'Criar recebedor', css_class='d-inline-block px-4 mb-2 py-2 btn-primary'),
+                    css_class='form-group col-md-12 mb-0 text-center'
+                )
+            )
         )
 
 class TransacaoForm(forms.Form):
@@ -70,7 +75,12 @@ class TransacaoForm(forms.Form):
                 Column('recebedor_2_valor', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
-            Submit('submit', 'Realizar transação', css_class='btn-block btn-primary')
+            Row(
+                Column(
+                    Submit('submit', 'Realizar transação', css_class='d-inline-block px-4 mb-2 py-2 btn-primary'),
+                    css_class='form-group col-md-12 mb-0 text-center'
+                )
+            )
         )
 
 class EstornoForm(forms.Form):
@@ -108,5 +118,10 @@ class EstornoForm(forms.Form):
                 Column('split_2_id', css_class='form-group col-md-4 mb-0'),
                 css_class='form-row'
             ),
-            Submit('submit', 'Realizar estorno', css_class='btn-block btn-primary')
+            Row(
+                Column(
+                    Submit('submit', 'Realizar estorno', css_class='d-inline-block px-4 mb-2 py-2 btn-primary'),
+                    css_class='form-group col-md-12 mb-0 text-center'
+                )
+            )
         )

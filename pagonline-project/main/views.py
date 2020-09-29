@@ -17,7 +17,10 @@ def home(request):
     transacao_form = TransacaoForm
     estorno_form = EstornoForm
     pagarme_api = os.getenv("PAGARME_API_KEY")
-    return render(request, "main/home.html",{"page_title": "Pagamento Online", "recebedor_form": recebedor_form, "transacao_form": transacao_form, "estorno_form": estorno_form, "pagarme_api": pagarme_api})
+    return render(request, "main/home.html",{"page_title": "Utilização da API", "recebedor_form": recebedor_form, "transacao_form": transacao_form, "estorno_form": estorno_form, "pagarme_api": pagarme_api})
+
+def meios_pagamento(request):
+    return render(request, "main/meios_pagamento.html",{"page_title": "Meios de pagamento online"})
 
 def criar_recebedor(request):
     if request.method == 'POST':
@@ -98,10 +101,10 @@ def criar_transacao(request):
                 "card_number": "4111111111111111",
                 "card_cvv": "123",
                 "card_expiration_date": "0922",
-                "card_holder_name": "Morpheus Fishburne",
+                "card_holder_name": "Comprador de Teste",
                 "customer": {
                 "external_id": "#3311",
-                "name": "Morpheus Fishburne",
+                "name": "Comprador de Teste",
                 "type": "individual",
                 "country": "br",
                 "email": "mopheus@nabucodonozor.com",
